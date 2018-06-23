@@ -1,7 +1,12 @@
 package controller;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.io.FileInputStream;
 
 @SpringBootApplication
 public class Application {
@@ -14,7 +19,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
     private static void startFirebase(){
-   /*     FileInputStream serviceAccount = new FileInputStream("path/to/serviceAccountKey.json");
+        FileInputStream serviceAccount = new FileInputStream("path/to/serviceAccountKey.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -22,5 +27,5 @@ public class Application {
                 .build();
 
         FirebaseApp.initializeApp(options);
-    }*/
+    }
 }
