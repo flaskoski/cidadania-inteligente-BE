@@ -16,6 +16,9 @@ apply plugin: 'io.spring.dependency-management'
 bootJar {
     baseName = 'gs-rest-service'
     version =  '0.1.0'
+    baseName = 'gs-securing-web'
+    version =  '0.1.0'
+
 }
 
 repositories {
@@ -26,8 +29,10 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile 'com.google.firebase:firebase-admin:5.9.0'
+    compile 'org.springframework.boot:spring-boot-starter-security'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

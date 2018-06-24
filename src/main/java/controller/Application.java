@@ -22,7 +22,7 @@ public class Application {
     private static void startFirebase(){
         FileInputStream serviceAccount = null;
         try {
-            serviceAccount = new FileInputStream("firebase/cidadania-inteligente-firebase-adminsdk-r64q9-66953f20fc.json");
+            serviceAccount = new FileInputStream("resources/cidadania-inteligente-firebase-adminsdk-r64q9-66953f20fc.json");
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl("https://cidadania-inteligente.firebaseio.com/")
