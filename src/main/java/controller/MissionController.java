@@ -52,7 +52,7 @@ public class MissionController {
                         "Agora você vai mostrar que sabe tudo de arte respondendo perguntas sobre obras de arte presentes num dos pontos mais famosos de São Paulo, o MASP!"));
                 missions.add(new Mission("Em busca do tesouro...", ""));
 
-                System.out.println(decodedToken);
+                System.out.println("token is valid.");
             }
         });
         System.out.println(missions.size());
