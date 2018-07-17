@@ -16,6 +16,8 @@ public class Mission implements Serializable {
         this.missionIconId = NO_IMAGE_PROVIDED;
     }
 
+    public Mission(){}
+
     public String getMissionName() {
         return missionName;
     }
