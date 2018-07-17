@@ -3,6 +3,7 @@ package app.controller;
 import app.model.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class DbMissionController {
     @Autowired
     private MissionRepository repository;
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Mission> getMissions(){
 
         // repository.save(new Mission("Mission 1", "Try to get into the Database..."));
