@@ -1,6 +1,7 @@
-package model;
+package app.model;
 
 import java.io.Serializable;
+import org.springframework.data.annotation.Id;
 
 public class Mission implements Serializable {
     public Mission(String missionName, String description, Integer missionIconId) {
@@ -36,6 +37,8 @@ public class Mission implements Serializable {
     }
     private String missionName;
     private Integer missionIconId;
+    @Id
+    private String _id;
 
     public String getDescription() {
         return description;

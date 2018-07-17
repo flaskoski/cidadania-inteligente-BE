@@ -1,4 +1,4 @@
-package model;
+package app.model;
 
 
 import java.security.InvalidParameterException;
@@ -44,7 +44,7 @@ public class QuestionTask extends Task {
         this.question = question;
         this.answers = answers;
         this.correctAnswer = correctAnswer;
-        this.timeToAnswer = Task.TIMER_OFF;
+        this.timeToAnswer = TIMER_OFF;
         this.title = title;
     }
 

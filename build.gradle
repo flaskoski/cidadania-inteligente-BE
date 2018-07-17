@@ -18,6 +18,8 @@ bootJar {
     version =  '0.1.0'
     baseName = 'gs-securing-web'
     version =  '0.1.0'
+    baseName = 'gs-accessing-data-mongodb'
+    version =  '0.1.0'
 
 }
 
@@ -32,7 +34,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile 'com.google.firebase:firebase-admin:5.9.0'
-    compile 'org.springframework.boot:spring-boot-starter-security'
+//    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

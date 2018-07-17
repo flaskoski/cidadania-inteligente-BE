@@ -1,24 +1,16 @@
-package controller;
+package app.controller;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
+import app.model.Mission;
 import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
-import model.Mission;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.junit.platform.commons.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 public class MissionController {
