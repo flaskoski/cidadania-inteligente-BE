@@ -4,6 +4,7 @@ import app.model.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,5 +25,17 @@ public class DbMissionController {
 
         System.out.println();
         return repository.findAll();
+    }
+    @RequestMapping(value = "/1", method = RequestMethod.GET)
+    public @ResponseBody Mission getMission(){
+
+        // repository.save(new Mission("Mission 1", "Try to get into the Database..."));
+        System.out.println("Customers found with findAll():");
+        System.out.println("-------------------------------");
+        for(Mission mission : repository.findAll())
+            System.out.println(mission.getMissionName());
+
+        System.out.println();
+        return repository.findAll().get(0);
     }
 }
