@@ -1,9 +1,30 @@
 package app.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 public class Mission implements Serializable {
+    private String missionName;
+    private Integer missionIconId;
+    private List<String> taskIDs;
+
+    public List<String> getTaskIDs() {
+        return taskIDs;
+    }
+
+    public void setTaskIDs(List<String> taskIDs) {
+        this.taskIDs = taskIDs;
+    }
+
+    private String description;
+    private static final Integer NO_IMAGE_PROVIDED = -1;
+
+    @Id
+    private String _id;
+
+
     public Mission(String missionName, String description, Integer missionIconId) {
         this.missionName = missionName;
         this.missionIconId = missionIconId;
@@ -37,10 +58,6 @@ public class Mission implements Serializable {
     public boolean hasImage(){
         return this.getMissionIconId() != NO_IMAGE_PROVIDED;
     }
-    private String missionName;
-    private Integer missionIconId;
-    @Id
-    private String _id;
 
     public String getDescription() {
         return description;
@@ -49,8 +66,5 @@ public class Mission implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    private String description;
-    private static final Integer NO_IMAGE_PROVIDED = -1;
 
 }

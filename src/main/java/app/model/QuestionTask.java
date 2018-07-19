@@ -1,12 +1,21 @@
 package app.model;
 
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
+@Document(collection = "tasks")
 public class QuestionTask extends Task {
     private String question;
-
+    private ArrayList<String> answers;
+    private Integer timeToAnswer;
+    private Integer correctAnswer;
+    @Id
+    private String _id;
     /**
      *
      * @param title - Title of the task
@@ -25,12 +34,6 @@ public class QuestionTask extends Task {
         this.correctAnswer = correctAnswer;
         this.title = title;
     }
-
-    private ArrayList<String> answers;
-    private Integer timeToAnswer;
-    private String title;
-    private Integer correctAnswer;
-
     /**
      *
      * @param title - Title of the task
