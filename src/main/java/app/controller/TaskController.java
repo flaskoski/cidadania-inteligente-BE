@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import app.model.QuestionTask;
@@ -29,8 +30,7 @@ public class TaskController {
         final ArrayList<QuestionTask> tasks= new ArrayList<>();
 
         if(idToken != null)
-            System.out.println("token caught!");
-            System.out.println("TaskIDs: "+taskIds.toString());
+            System.out.print("token caught!");
 //        if (StringUtils.isBlank(idToken)) {
 //            throw new IllegalArgumentException("FirebaseTokenBlank");
 //        }
@@ -44,11 +44,15 @@ public class TaskController {
                     }
                     @Override
                     public void onSuccess(FirebaseToken decodedToken) {
-                        System.out.println("token is valid.");
-
-                        for(QuestionTask t: tasksRepository.findAll())
-                            tasks.add(t);
-
+                        System.out.println(" Token is valid.");
+                        System.out.println("TaskIDs: "+taskIds.toString());
+                        QuestionTask taskRetrieved;
+                        for (String taskId : taskIds){
+                            try {
+                                tasks.add(tasksRepository.findById(taskId).get());
+                            }
+                            catch(Exception E){}
+                        }
                         latch.countDown();
                     }
                 });
