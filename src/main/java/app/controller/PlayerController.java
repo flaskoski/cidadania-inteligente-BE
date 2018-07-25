@@ -32,12 +32,6 @@ public class PlayerController {
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
         final ArrayList<QuestionTask> tasks= new ArrayList<>();
 
-
-        if(idToken != null)
-            System.out.println("token caught!");
-
-
-
         CountDownLatch latch = new CountDownLatch(1);
         ApiFutures.addCallback(FirebaseAuth.getInstance().verifyIdTokenAsync(idToken),
                 new ApiFutureCallback<FirebaseToken>() {
@@ -55,23 +49,13 @@ public class PlayerController {
 
                         missionId = params[0];
                         String taskId= params[1];
-                        Boolean taskResult = Boolean.valueOf(params[2]);
-                        Integer taskprogress = (taskResult?MissionProgress.TASK_COMPLETED:MissionProgress.TASK_FAILED);
-
-
-                        tasksProgress.put(taskId, taskprogress);
-                        MissionProgress missionProgress = new MissionProgress(missionId, tasksProgress);
+                        Integer taskprogress = Integer.valueOf(params[2]);
                         for(Integer i=1; i<=3; i++){
                             System.out.println((i).toString()+":" + params[i-1]);
                         }
-                        Player p = new Player();
-                        HashMap<String, MissionProgress> missionProgresses = new HashMap<>();
-                        missionProgresses.put(missionId, missionProgress);
-                        p.setMissions(missionProgresses);
-                        p.set_id(missionId);
-                        //TODO update specific mission of player: needs to search correct location of mission in player's array of missionProgress
-                        //playersRepository.save(p);
+
                         playersRepository.updateTaskProgress(playerUid, missionId, taskId, taskprogress);
+                        //Release thread wait
                         latch.countDown();
                     }
                 });
@@ -80,7 +64,6 @@ public class PlayerController {
         } catch (InterruptedException | NullPointerException e) {
             e.printStackTrace();
         }
-        System.out.println(tasks.size());
         return true;
     }
 
