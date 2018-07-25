@@ -21,9 +21,17 @@ public class Mission implements Serializable {
     private String description;
     private static final Integer NO_IMAGE_PROVIDED = -1;
 
+
     @Id
     private String _id;
 
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public Mission(String missionName, String description, Integer missionIconId) {
         this.missionName = missionName;

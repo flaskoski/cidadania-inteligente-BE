@@ -32,8 +32,6 @@ public class MissionController {
     public ArrayList<Mission> sendMissions(@RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
         final ArrayList<Mission> missions = new ArrayList<>();
         final Mission[] mission = new Mission[1];
-        mission[0] = new Mission("Aventura no MASP",
-                "Agora você vai mostrar que sabe tudo de arte respondendo perguntas sobre obras de arte presentes num dos pontos mais famosos de São Paulo, o MASP!");
         if(idToken != null)
             System.out.println("token caught!");
 //        if (StringUtils.isBlank(idToken)) {
@@ -50,14 +48,12 @@ public class MissionController {
             }
             @Override
             public void onSuccess(FirebaseToken decodedToken) {
-                missions.add(new Mission("Aventura no MASP",
-                        "Agora você vai mostrar que sabe tudo de arte respondendo perguntas sobre obras de arte presentes num dos pontos mais famosos de São Paulo, o MASP!"));
-                missions.add(new Mission("Em busca do tesouro...", ""));
-
                 System.out.println("token is valid.");
 
-                for(Mission m : missionRepository.findAll())
+                for(Mission m : missionRepository.findAll()) {
                     missions.add(m);
+                    System.out.println("id: "+ m.get_id());
+                }
 
                 latch.countDown();
             }

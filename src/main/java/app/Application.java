@@ -6,13 +6,9 @@ import com.google.firebase.FirebaseOptions;
 //import MissionRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.FileInputStream;
-import java.util.Arrays;
+
 
 @SpringBootApplication
 public class Application {

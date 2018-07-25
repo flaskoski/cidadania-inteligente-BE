@@ -53,6 +53,7 @@ public class QuestionTask extends Task {
 
     public QuestionTask(){
 
+
     }
 
     private void checkIfParametersAreValid(String title, String question, ArrayList<String> answers, Integer correctAnswer){
@@ -62,7 +63,13 @@ public class QuestionTask extends Task {
             throw new InvalidParameterException("Correct Answer doesn't exist!");
 
     }
+    public String get_id() {
+        return _id;
+    }
 
+    public void set_id(String _id) {
+        this._id = _id;
+    }
     @Override
     public String getTitle() {
         return title;
