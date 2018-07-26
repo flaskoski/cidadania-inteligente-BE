@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface PlayersRepository extends MongoRepository<Player, String>, PlayersRepositoryCustom {
 
-     //   public QuestionTask findByTitle(String title);
+    //   public QuestionTask findByTitle(String title);
         //public List<Mission> findByLastName(String lastName);
 
     //TODO put all that below on an implementation of another interface. Check https://www.mkyong.com/spring-data/spring-data-add-custom-method-to-repository/

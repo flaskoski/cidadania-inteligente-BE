@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import java.util.HashMap;
 import java.util.Hashtable;
 
 public class PlayersRepositoryCustomImpl implements PlayersRepositoryCustom{
@@ -33,6 +34,16 @@ public class PlayersRepositoryCustomImpl implements PlayersRepositoryCustom{
         UpdateResult result = mongoTemplate.updateFirst(query, update, Player.class);
 
         return result.getModifiedCount();
+    }
+
+    @Override
+    public HashMap<String, Integer> findTasksProgressByMission(String playerUid, String missionId) {
+        Query query = new Query(Criteria.where("firebaseId").is(playerUid));
+        query.fields().include("missions."+missionId+".taskProgress");
+        Player p = mongoTemplate.findOne(query, Player.class);
+        if(p.getMissions().size() > 0)
+            return p.getMissions().get(missionId).getTaskProgress();
+        else return null;
     }
 
 }
