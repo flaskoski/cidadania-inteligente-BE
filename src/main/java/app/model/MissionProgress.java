@@ -1,8 +1,6 @@
 package app.model;
 
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
 
 public class MissionProgress {
     //CONSTANTS
@@ -10,7 +8,7 @@ public class MissionProgress {
     public static final Integer TASK_NOT_STARTED = 0;
     public static final Integer TASK_FAILED = -1;
     public static final Integer MISSION_NOT_STARTED = 0;
-    public static final Integer MISSION_COMPLETED = 1;
+    public static final Integer MISSION_FINISHED = 1;
     public static final Integer MISSION_IN_PROGRESS = 2;
 
 
@@ -48,7 +46,7 @@ public class MissionProgress {
 
     private void updateStatus() {
         if(! this.taskProgress.containsValue(TASK_NOT_STARTED)){
-            status = MISSION_COMPLETED;
+            status = MISSION_FINISHED;
         }else if(this.taskProgress.containsValue(TASK_COMPLETED)){
             status = MISSION_IN_PROGRESS;
         }else status = MISSION_NOT_STARTED;

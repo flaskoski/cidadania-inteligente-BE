@@ -1,14 +1,9 @@
 package app.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
 
-import app.model.Mission;
 import app.model.MissionProgress;
-import app.model.Player;
-import app.model.QuestionTask;
 import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
 public class PlayerController {
 
@@ -29,10 +22,10 @@ public class PlayerController {
 
     @RequestMapping("/player/missionProgress")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
-    public HashMap<String, Integer> sendTasksProgress(
+    public MissionProgress sendTasksProgress(
             @RequestBody String[] params,
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
-        final HashMap<String, Integer>[] tasksProgress = new HashMap[]{new HashMap<String, Integer>()};
+        final MissionProgress[] missionProgress = new MissionProgress[1];
         CountDownLatch latch = new CountDownLatch(1);
         ApiFutures.addCallback(FirebaseAuth.getInstance().verifyIdTokenAsync(idToken),
                 new ApiFutureCallback<FirebaseToken>() {
@@ -52,7 +45,7 @@ public class PlayerController {
                         System.out.println("Retrieving tasks progress");
                         System.out.println("MissionID:" + missionId);
 
-                        tasksProgress[0] = playersRepository.findTasksProgressByMission(playerUid, missionId);
+                        missionProgress[0] = new MissionProgress(missionId, playersRepository.findTasksProgressByMission(playerUid, missionId));
                         //Release thread wait
                         latch.countDown();
                     }
@@ -62,7 +55,7 @@ public class PlayerController {
         } catch (InterruptedException | NullPointerException e) {
             e.printStackTrace();
         }
-        return tasksProgress[0];
+        return missionProgress[0];
     }
 
     @RequestMapping("/player")
