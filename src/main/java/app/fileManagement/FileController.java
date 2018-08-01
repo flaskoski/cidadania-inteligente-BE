@@ -44,7 +44,7 @@ public class FileController {
                 .map(file -> uploadFile(file))
                 .collect(Collectors.toList());
     }
-
+    //Tenho que encontrar um jeito de pegar os filenames com "/" para poder usar varias pastas
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
@@ -54,6 +54,7 @@ public class FileController {
         String contentType = null;
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+            System.out.println("Imagem "+fileName);
         } catch (IOException ex) {
             logger.info("Could not determine file type.");
         }

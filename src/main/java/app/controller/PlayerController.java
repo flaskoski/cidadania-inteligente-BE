@@ -27,7 +27,7 @@ public class PlayerController {
     @Autowired
     private PlayersRepository playersRepository;
 
-    @RequestMapping("/player/taskProgress")
+    @RequestMapping("/player/missionProgress")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
     public HashMap<String, Integer> sendTasksProgress(
             @RequestBody String[] params,

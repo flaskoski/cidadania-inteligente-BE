@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class MissionProgress {
+    //CONSTANTS
     public static final Integer TASK_COMPLETED = 100;
     public static final Integer TASK_NOT_STARTED = 0;
     public static final Integer TASK_FAILED = -1;
@@ -12,6 +13,8 @@ public class MissionProgress {
     public static final Integer MISSION_COMPLETED = 1;
     public static final Integer MISSION_IN_PROGRESS = 2;
 
+
+    //METHODS
     public String getMissionId() {
         return missionId;
     }
@@ -26,6 +29,7 @@ public class MissionProgress {
 
     public void setTaskProgress(HashMap<String, Integer> taskProgress) {
         this.taskProgress = taskProgress;
+        updateStatus();
     }
 
     public Integer getStatus() {
@@ -50,6 +54,7 @@ public class MissionProgress {
         }else status = MISSION_NOT_STARTED;
     }
 
+    //ATTRIBUTES
     private String missionId;
     private HashMap<String, Integer> taskProgress;
     private Integer status;
