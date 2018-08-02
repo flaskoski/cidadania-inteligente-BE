@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="23dafe0c-7c64-485c-9eac-628eebad76d0" name="Default" comment="progress being saved AND RETRIEVED on db&#10;missionProgress on player controller">
+    <list default="true" id="23dafe0c-7c64-485c-9eac-628eebad76d0" name="Default" comment="MissionProgress being sent from PlayerController">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controller/PlayerController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controller/PlayerController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controller/PlayerController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controller/PlayerController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controller/PlayerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controller/PlayerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controller/PlayerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/MissionProgress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/MissionProgress.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -23,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PlayerController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PlayerController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controller/PlayerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="57" column="30" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+            <state relative-caret-position="571">
+              <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -35,11 +37,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MissionProgress.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MissionProgress.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/model/MissionProgress.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="10" column="48" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+            <state relative-caret-position="60">
+              <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/fileManagement/FileController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="571">
+              <caret line="66" column="34" lean-forward="true" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -56,7 +70,7 @@
       <file leaf-file-name="PlayersRepositoryCustomImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controller/PlayersRepositoryCustomImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-60">
+            <state relative-caret-position="300">
               <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -89,7 +103,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="file-management" />
+        <entry key="$PROJECT_DIR$" value="mission-progress" />
       </map>
     </option>
   </component>
@@ -506,8 +520,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/static/js/main.js" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/main.css" />
         <option value="$PROJECT_DIR$/src/main/java/app/fileManagement/FileController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/controller/PlayerController.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/model/MissionProgress.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controller/PlayerController.java" />
       </list>
     </option>
   </component>
@@ -567,6 +581,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cidadania_Inteligente_BE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cidadania_Inteligente_BE" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="fileManagement" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Cidadania_Inteligente_BE" type="b2602c69:ProjectViewProjectNode" />
@@ -902,7 +925,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533085227784</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="MissionProgress being sent from PlayerController">
+      <created>1533090562477</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1533090562479</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1021,7 +1051,8 @@
     <MESSAGE value="progress being saved NAD RETRIEVED on db" />
     <MESSAGE value="progress being saved AND RETRIEVED on db" />
     <MESSAGE value="progress being saved AND RETRIEVED on db&#10;missionProgress on player controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="progress being saved AND RETRIEVED on db&#10;missionProgress on player controller" />
+    <MESSAGE value="MissionProgress being sent from PlayerController" />
+    <option name="LAST_COMMIT_MESSAGE" value="MissionProgress being sent from PlayerController" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1312,6 +1343,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <element signature="e#494#495#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1319,13 +1353,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-559">
           <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/fileManagement/FileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="66" column="34" lean-forward="true" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -1355,18 +1382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controller/PlayersRepositoryCustomImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
+        <state relative-caret-position="300">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controller/PlayerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="57" column="30" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1375,8 +1392,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/model/MissionProgress.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="10" column="48" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+        <state relative-caret-position="60">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/fileManagement/FileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="66" column="34" lean-forward="true" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controller/PlayerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
