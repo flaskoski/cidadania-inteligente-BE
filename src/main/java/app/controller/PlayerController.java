@@ -3,11 +3,13 @@ package app.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 
 import app.firebase.FirebaseValidator;
 import app.model.Mission;
 import app.model.MissionProgress;
+import app.model.Player;
 import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,22 +28,17 @@ public class PlayerController {
     @Autowired
     private MissionRepository missionRepository;
 
-    @RequestMapping("/player/manyMissionsStatus")
+    @RequestMapping("/player/allMissionsStatus")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
-    public List<MissionProgress> sendManyMissionsStatus(
+    public HashMap<String, MissionProgress> sendAllMissionsStatus(
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
         List<MissionProgress> missionsProgress = new ArrayList<>();
         String playerUid = FirebaseValidator.validateUser(idToken);
         if(playerUid == null)
             return null;
-
-
-        System.out.println("Retrieving tasks progress");
-        System.out.println("MissionID:");
-
-        // missionProgress[0] = new MissionProgress(playersRepository.findTasksProgressByMission(playerUid, missionId));
-
-        return missionsProgress;
+        System.out.println("Retrieving all missions progress");
+        Optional<Player> p =playersRepository.findById(playerUid);
+        return p.map(Player::getMissions).orElse(null);
     }
 
     @RequestMapping("/player/missionProgress")
