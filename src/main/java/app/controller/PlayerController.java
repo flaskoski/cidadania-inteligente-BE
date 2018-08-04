@@ -3,6 +3,7 @@ package app.controller;
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 
+import app.firebase.FirebaseValidator;
 import app.model.Mission;
 import app.model.MissionProgress;
 import com.google.api.core.ApiFutureCallback;
@@ -23,7 +24,7 @@ public class PlayerController {
     @Autowired
     private MissionRepository missionRepository;
 
-    @RequestMapping("/player/allMissionsStatus")
+    @RequestMapping("/player/manyMissionsStatus")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
     public MissionProgress sendAllMissionsStatus(
             @RequestBody String[] params,
@@ -113,42 +114,26 @@ public class PlayerController {
     public Boolean updateMissionProgress(
             @RequestBody String[] params,
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
-        final Boolean[] updateSuccessful = {false};
-        CountDownLatch latch = new CountDownLatch(1);
-        ApiFutures.addCallback(FirebaseAuth.getInstance().verifyIdTokenAsync(idToken),
-                new ApiFutureCallback<FirebaseToken>() {
-                    @Override
-                    public void onFailure(Throwable t) {
-                        System.out.println("failure");
-                        latch.countDown();
-                    }
-                    @Override
-                    public void onSuccess(FirebaseToken decodedToken) {
-                        System.out.println(" Token is valid.");
-                        String playerUid = decodedToken.getUid();
-                        String missionId;
-                        System.out.println("Updating task progress");
-                        missionId = params[0];
-                        String taskId= params[1];
-                        Integer taskprogress = Integer.valueOf(params[2]);
-                        for(Integer i=1; i<=3; i++){
-                            System.out.println((i).toString()+":" + params[i-1]);
-                        }
-                        try {
-                            Mission mission = missionRepository.findById(missionId).get();
-                            playersRepository.updateMissionProgress(playerUid, mission, taskId, taskprogress);
-                            updateSuccessful[0] = true;
-                        }catch (NullPointerException e){}
-                        //Release thread wait
-                        latch.countDown();
-                    }
-                });
-        try {
-            latch.await();
-        } catch (InterruptedException | NullPointerException e) {
-            e.printStackTrace();
+
+        String playerUid = FirebaseValidator.validateUser(idToken);
+        if(playerUid == null)
+            return false;
+        String missionId;
+        System.out.println("Updating task progress");
+        missionId = params[0];
+        String taskId= params[1];
+        Integer taskprogress = Integer.valueOf(params[2]);
+        for(Integer i=1; i<=3; i++){
+            System.out.println((i).toString()+":" + params[i-1]);
         }
-        return updateSuccessful[0];
+        try {
+            Mission mission = missionRepository.findById(missionId).get();
+            playersRepository.updateMissionProgress(playerUid, mission, taskId, taskprogress);
+            return true;
+        }catch (NullPointerException e){
+            return false;
+        }
+
     }
 
 }
