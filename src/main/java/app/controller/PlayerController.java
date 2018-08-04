@@ -1,6 +1,8 @@
 package app.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import app.firebase.FirebaseValidator;
@@ -26,87 +28,48 @@ public class PlayerController {
 
     @RequestMapping("/player/manyMissionsStatus")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
-    public MissionProgress sendAllMissionsStatus(
-            @RequestBody String[] params,
+    public List<MissionProgress> sendManyMissionsStatus(
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
-        final MissionProgress[] missionProgress = new MissionProgress[1];
-        CountDownLatch latch = new CountDownLatch(1);
-        ApiFutures.addCallback(FirebaseAuth.getInstance().verifyIdTokenAsync(idToken),
-                new ApiFutureCallback<FirebaseToken>() {
-                    @Override
-                    public void onFailure(Throwable t) {
-                        System.out.println("failure");
-                        latch.countDown();
-                    }
-                    @Override
-                    public void onSuccess(FirebaseToken decodedToken) {
-                        System.out.println(" Token is valid.");
-                        String playerUid = decodedToken.getUid();
-                        String missionId;
+        List<MissionProgress> missionsProgress = new ArrayList<>();
+        String playerUid = FirebaseValidator.validateUser(idToken);
+        if(playerUid == null)
+            return null;
 
-                        missionId = params[0];
 
-                        System.out.println("Retrieving tasks progress");
-                        System.out.println("MissionID:" + missionId);
+        System.out.println("Retrieving tasks progress");
+        System.out.println("MissionID:");
 
-                       // missionProgress[0] = new MissionProgress(playersRepository.findTasksProgressByMission(playerUid, missionId));
-                        //Release thread wait
-                        latch.countDown();
-                    }
-                });
-        try {
-            latch.await();
-        } catch (InterruptedException | NullPointerException e) {
-            e.printStackTrace();
-        }
-        return missionProgress[0];
+        // missionProgress[0] = new MissionProgress(playersRepository.findTasksProgressByMission(playerUid, missionId));
+
+        return missionsProgress;
     }
 
     @RequestMapping("/player/missionProgress")
     public MissionProgress sendMissionProgress(
             @RequestBody String[] params,
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
-        final MissionProgress[] missionProgress = new MissionProgress[1];
-        CountDownLatch latch = new CountDownLatch(1);
-        ApiFutures.addCallback(FirebaseAuth.getInstance().verifyIdTokenAsync(idToken),
-                new ApiFutureCallback<FirebaseToken>() {
-                    @Override
-                    public void onFailure(Throwable t) {
-                        System.out.println("failure");
-                        latch.countDown();
-                    }
-                    @Override
-                    public void onSuccess(FirebaseToken decodedToken) {
-                        //TODO tirar todo o c[odigo daqui de dentro
-                        System.out.println(" Token is valid.");
-                        String playerUid = decodedToken.getUid();
-                        String missionId;
+        final MissionProgress missionProgress;
+        String playerUid = FirebaseValidator.validateUser(idToken);
+        if(playerUid == null)
+            return null;
+        String missionId;
 
-                        missionId = params[0];
+        missionId = params[0];
 
-                        System.out.println("Retrieving tasks progress");
-                        System.out.println("MissionID:" + missionId);
+        System.out.println("Retrieving tasks progress");
+        System.out.println("MissionID:" + missionId);
 
-                        HashMap<String, Integer> tasksProgress = playersRepository.findTasksProgressByMission(playerUid, missionId);
+        HashMap<String, Integer> tasksProgress = playersRepository.findTasksProgressByMission(playerUid, missionId);
 
-                        //If mission progress still doesnt exist no DB, create an empty one
-                        if(tasksProgress.size()==0) {
-                            Mission mission = missionRepository.findById(missionId).get();
-                            missionProgress[0] = playersRepository.createMissionProgress(playerUid, mission);
-                        }
-                        else{
-                            missionProgress[0] = new MissionProgress(tasksProgress);
-                        }
-                        //Release thread wait
-                        latch.countDown();
-                    }
-                });
-        try {
-            latch.await();
-        } catch (InterruptedException | NullPointerException e) {
-            e.printStackTrace();
+        //If mission progress still doesnt exist no DB, create an empty one
+        if(tasksProgress.size()==0) {
+            Mission mission = missionRepository.findById(missionId).get();
+            missionProgress = playersRepository.createMissionProgress(playerUid, mission);
         }
-        return missionProgress[0];
+        else{
+            missionProgress = new MissionProgress(tasksProgress);
+        }
+        return missionProgress;
     }
 
     @RequestMapping("/player")

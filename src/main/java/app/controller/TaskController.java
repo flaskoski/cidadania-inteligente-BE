@@ -1,16 +1,11 @@
 package app.controller;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
+import java.util.Optional;
 
+import app.firebase.FirebaseValidator;
 import app.model.QuestionTask;
 import app.model.Task;
-import com.google.api.core.ApiFuture;
-import com.google.api.core.ApiFutureCallback;
-import com.google.api.core.ApiFutures;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -35,33 +30,16 @@ public class TaskController {
 //        if (StringUtils.isBlank(idToken)) {
 //            throw new IllegalArgumentException("FirebaseTokenBlank");
 //        }
-        CountDownLatch latch = new CountDownLatch(1);
-        ApiFutures.addCallback(FirebaseAuth.getInstance().verifyIdTokenAsync(idToken),
-                new ApiFutureCallback<FirebaseToken>() {
-                    @Override
-                    public void onFailure(Throwable t) {
-                        System.out.print("failure");
-                        latch.countDown();
-                    }
-                    @Override
-                    public void onSuccess(FirebaseToken decodedToken) {
-                        System.out.println(" Token is valid.");
-                        System.out.println("TaskIDs: "+taskIds.toString());
-                        QuestionTask taskRetrieved;
-                        for (String taskId : taskIds){
-                            try {
-                                tasks.add(tasksRepository.findById(taskId).get());
-                            }
-                            catch(Exception E){}
-                        }
-                        latch.countDown();
-                    }
-                });
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+        String playerUid = FirebaseValidator.validateUser(idToken);
+        if(playerUid == null)
+            return null;
+
+        System.out.println("TaskIDs: "+taskIds.toString());
+        for (String taskId : taskIds){
+            tasksRepository.findById(taskId).ifPresent(tasks::add);
         }
+
         System.out.println(tasks.size());
         return tasks;
     }

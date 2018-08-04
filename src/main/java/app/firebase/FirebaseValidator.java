@@ -11,6 +11,7 @@ public class FirebaseValidator {
     public static String validateUser(String idToken){
         CountDownLatch latch = new CountDownLatch(1);
         final String[] playerUid = new String[1];
+        playerUid[0] = null;
         ApiFutures.addCallback(FirebaseAuth.getInstance().verifyIdTokenAsync(idToken),
                 new ApiFutureCallback<FirebaseToken>() {
                     @Override
