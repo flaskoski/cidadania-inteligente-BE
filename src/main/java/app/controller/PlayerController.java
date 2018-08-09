@@ -28,17 +28,16 @@ public class PlayerController {
     @Autowired
     private MissionRepository missionRepository;
 
-    @RequestMapping("/player/allMissionsStatus")
+    @RequestMapping("/player/allMissionsProgress")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
     public HashMap<String, MissionProgress> sendAllMissionsStatus(
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
-        List<MissionProgress> missionsProgress = new ArrayList<>();
         String playerUid = FirebaseValidator.validateUser(idToken);
         if(playerUid == null)
             return null;
-        System.out.println("Retrieving all missions progress");
-        Optional<Player> p =playersRepository.findById(playerUid);
-        return p.map(Player::getMissions).orElse(null);
+        System.out.println("Retrieving all missions progress from player");
+        Player p = playersRepository.findByFirebaseId(playerUid);
+        return p.getMissions();
     }
 
     @RequestMapping("/player/missionProgress")
@@ -53,7 +52,7 @@ public class PlayerController {
 
         missionId = params[0];
 
-        System.out.println("Retrieving tasks progress");
+        System.out.println("Retrieving mission progress");
         System.out.println("MissionID:" + missionId);
 
         HashMap<String, Integer> tasksProgress = playersRepository.findTasksProgressByMission(playerUid, missionId);
