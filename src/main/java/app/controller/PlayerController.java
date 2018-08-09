@@ -29,7 +29,6 @@ public class PlayerController {
     private MissionRepository missionRepository;
 
     @RequestMapping("/player/allMissionsProgress")
-    //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
     public HashMap<String, MissionProgress> sendAllMissionsStatus(
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
         String playerUid = FirebaseValidator.validateUser(idToken);
