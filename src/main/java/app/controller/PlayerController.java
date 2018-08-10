@@ -35,8 +35,8 @@ public class PlayerController {
         if(playerUid == null)
             return null;
         System.out.println("Retrieving all missions progress from player");
-        Player p = playersRepository.findByFirebaseId(playerUid);
-        return p.getMissions();
+        HashMap<String, MissionProgress> missionsProgress = playersRepository.findByFirebaseId(playerUid).getMissions();
+        return missionsProgress;
     }
 
     @RequestMapping("/player/missionProgress")
@@ -58,7 +58,12 @@ public class PlayerController {
 
         //If mission progress still doesnt exist no DB, create an empty one
         if(tasksProgress.size()==0) {
-            Mission mission = missionRepository.findById(missionId).get();
+            try {
+                Mission mission = missionRepository.findById(missionId).get();
+            }catch(Exception e){
+                e.printStackTrace();
+                return null;
+            }
             missionProgress = playersRepository.createMissionProgress(playerUid, mission);
         }
         else{
