@@ -69,6 +69,7 @@ public class PlayersRepositoryCustomImpl implements PlayersRepositoryCustom{
         Query query = new Query(Criteria.where("firebaseId").is(playerUid));
         query.fields().include("missions."+missionId);
         Player p = mongoTemplate.findOne(query, Player.class);
+        assert p != null;
         if(p.getMissions() != null && p.getMissions().size() > 0)
             return p.getMissions().get(missionId).getTaskProgress();
         else return new HashMap<>();
