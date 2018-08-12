@@ -60,11 +60,11 @@ public class PlayerController {
         if(tasksProgress.size()==0) {
             try {
                 Mission mission = missionRepository.findById(missionId).get();
+                missionProgress = playersRepository.createMissionProgress(playerUid, mission);
             }catch(Exception e){
                 e.printStackTrace();
                 return null;
             }
-            missionProgress = playersRepository.createMissionProgress(playerUid, mission);
         }
         else{
             missionProgress = new MissionProgress(tasksProgress);
