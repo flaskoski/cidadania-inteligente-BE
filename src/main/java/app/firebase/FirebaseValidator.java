@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class FirebaseValidator {
     public static String validateUser(String idToken){
@@ -29,7 +30,7 @@ public class FirebaseValidator {
                     }
                 });
         try {
-            latch.await();
+            latch.await(4, TimeUnit.SECONDS);
             return playerUid[0];
         } catch (InterruptedException | NullPointerException e) {
             e.printStackTrace();
