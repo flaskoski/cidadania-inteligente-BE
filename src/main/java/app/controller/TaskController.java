@@ -1,16 +1,14 @@
 package app.controller;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Predicate;
 
 import app.firebase.FirebaseValidator;
 import app.model.QuestionTask;
 import app.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TaskController {
@@ -21,12 +19,14 @@ public class TaskController {
     @RequestMapping("/tasks")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
     public ArrayList<QuestionTask> sendTasks(/*@RequestParam(value="missionID", defaultValue="") String missionID, */
-            @RequestBody ArrayList<String> taskIds,
-            @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
+            @RequestParam Map<String,String> params,
+            @RequestHeader HashMap<String, String> headers
+            ) {//@RequestHeader String idToken   "Authorization"
         final ArrayList<QuestionTask> tasks= new ArrayList<>();
-
+        String idToken = headers.get("Authorization".toLowerCase());
         if(idToken != null)
             System.out.print("token caught!");
+        else return null;
 //        if (StringUtils.isBlank(idToken)) {
 //            throw new IllegalArgumentException("FirebaseTokenBlank");
 //        }
@@ -35,8 +35,15 @@ public class TaskController {
         if(playerUid == null)
             return null;
 
-        System.out.println("TaskIDs: "+taskIds.toString());
-        for (String taskId : taskIds){
+        List<String> taskIDs = new ArrayList<>();
+        Iterator<Map.Entry<String, String>> it = params.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry<String,String> entry = it.next();
+            if(entry.getKey().toLowerCase().contains("taskid"))
+                taskIDs.add(entry.getValue());
+        }
+        System.out.println("TaskIDs: "+taskIDs.toString());
+        for (String taskId : taskIDs){
             tasksRepository.findById(taskId).ifPresent(tasks::add);
         }
 

@@ -41,18 +41,19 @@ public class PlayerController {
 
     @RequestMapping("/player/missionProgress")
     public MissionProgress sendMissionProgress(
-            @RequestBody String[] params,
+            @RequestHeader(value="missionID") String missionId,
+            //@RequestBody String[] params,
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
         final MissionProgress missionProgress;
         String playerUid = FirebaseValidator.validateUser(idToken);
         if(playerUid == null)
             return null;
-        String missionId;
+        //String missionId;
 
-        missionId = params[0];
+        //missionId = params[0];
 
         System.out.println("Retrieving mission progress");
-        System.out.println("MissionID:" + missionId);
+
 
         HashMap<String, Integer> tasksProgress = playersRepository.findTasksProgressByMission(playerUid, missionId);
 
@@ -69,6 +70,7 @@ public class PlayerController {
         else{
             missionProgress = new MissionProgress(tasksProgress);
         }
+        System.out.println("MissionID:" + missionId);
         return missionProgress;
     }
 
