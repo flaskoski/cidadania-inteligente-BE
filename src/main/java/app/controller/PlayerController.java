@@ -1,9 +1,6 @@
 package app.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
 import app.firebase.FirebaseValidator;
@@ -15,10 +12,7 @@ import com.google.api.core.ApiFutures;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PlayerController {
@@ -77,7 +71,7 @@ public class PlayerController {
     @RequestMapping("/player")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
     public Boolean updateMissionProgress(
-            @RequestBody String[] params,
+            @RequestParam Map<String,String> params,
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
 
         String playerUid = FirebaseValidator.validateUser(idToken);
@@ -85,12 +79,14 @@ public class PlayerController {
             return false;
         String missionId;
         System.out.println("Updating task progress");
-        missionId = params[0];
-        String taskId= params[1];
-        Integer taskprogress = Integer.valueOf(params[2]);
-        for(Integer i=1; i<=3; i++){
-            System.out.println((i).toString()+":" + params[i-1]);
-        }
+        missionId = params.get("missionId");
+        String taskId = params.get("taskId");
+        Integer taskprogress = Integer.valueOf(params.get("taskProgress"));
+//        String taskId= params[1];
+//        Integer taskprogress = Integer.valueOf(params[2]);
+        //for(Integer i=1; i<=3; i++){
+            System.out.println("Update missionId:"+missionId+"taskProgress: "+taskprogress.toString()    );
+        //}
         try {
             Mission mission = missionRepository.findById(missionId).get();
             playersRepository.updateMissionProgress(playerUid, mission, taskId, taskprogress);
