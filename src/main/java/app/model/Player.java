@@ -48,5 +48,8 @@ public class Player {
     }
 
     public Player(){}
+    public Player(String firebaseId){
+        this.firebaseId = firebaseId;
+    }
 
 }

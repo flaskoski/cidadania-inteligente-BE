@@ -1,16 +1,10 @@
 package app.controller;
 
 import java.util.*;
-import java.util.concurrent.CountDownLatch;
 
 import app.firebase.FirebaseValidator;
 import app.model.Mission;
 import app.model.MissionProgress;
-import app.model.Player;
-import com.google.api.core.ApiFutureCallback;
-import com.google.api.core.ApiFutures;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,19 +14,31 @@ public class PlayerController {
     @Autowired
     private PlayersRepository playersRepository;
     @Autowired
-    private MissionRepository missionRepository;
+    private MissionsRepository missionsRepository;
 
+    /**Get all missions progress
+     *
+     * @param idToken - Player authentication
+     * @return progress from all missions the player has done
+     */
     @RequestMapping("/player/allMissionsProgress")
     public HashMap<String, MissionProgress> sendAllMissionsStatus(
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
         String playerUid = FirebaseValidator.validateUser(idToken);
         if(playerUid == null)
             return null;
-        System.out.println("Retrieving all missions progress from player");
+        System.out.println("Retrieving all missions progress from player...");
         HashMap<String, MissionProgress> missionsProgress = playersRepository.findByFirebaseId(playerUid).getMissions();
+        System.out.println("All missions progress received.");
         return missionsProgress;
     }
 
+    /**Get mission progress from a specific mission
+     *
+     * @param missionId
+     * @param idToken - Player authentication
+     * @return the progress of the mission whose id was given as parameter
+     */
     @RequestMapping("/player/missionProgress")
     public MissionProgress sendMissionProgress(
             @RequestHeader(value="missionID") String missionId,
@@ -40,13 +46,10 @@ public class PlayerController {
             @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
         final MissionProgress missionProgress;
         String playerUid = FirebaseValidator.validateUser(idToken);
-        if(playerUid == null)
+        if(playerUid == null || missionId == null)
             return null;
-        //String missionId;
 
-        //missionId = params[0];
-
-        System.out.println("Retrieving mission progress");
+        System.out.println("Retrieving mission progress from ID " + missionId + "...");
 
 
         HashMap<String, Integer> tasksProgress = playersRepository.findTasksProgressByMission(playerUid, missionId);
@@ -54,7 +57,7 @@ public class PlayerController {
         //If mission progress still doesnt exist no DB, create an empty one
         if(tasksProgress.size()==0) {
             try {
-                Mission mission = missionRepository.findById(missionId).get();
+                Mission mission = missionsRepository.findById(missionId).get();
                 missionProgress = playersRepository.createMissionProgress(playerUid, mission);
             }catch(Exception e){
                 e.printStackTrace();
@@ -64,10 +67,16 @@ public class PlayerController {
         else{
             missionProgress = new MissionProgress(tasksProgress);
         }
-        System.out.println("MissionID:" + missionId);
+        System.out.println("Mission progress caught.");
         return missionProgress;
     }
 
+    /**Updates a task progress on the DB.
+     *
+     * @param params - "missionId", "taskId" and "taskProgress" (as String)
+     * @param idToken - Player authentication
+     * @return true if the update was sucessfull.
+     */
     @RequestMapping("/player")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
     public Boolean updateMissionProgress(
@@ -85,10 +94,10 @@ public class PlayerController {
 //        String taskId= params[1];
 //        Integer taskprogress = Integer.valueOf(params[2]);
         //for(Integer i=1; i<=3; i++){
-            System.out.println("Update missionId:"+missionId+"taskProgress: "+taskprogress.toString()    );
+        System.out.println("Update missionId:"+missionId+"taskProgress: "+taskprogress.toString()    );
         //}
         try {
-            Mission mission = missionRepository.findById(missionId).get();
+            Mission mission = missionsRepository.findById(missionId).get();
             playersRepository.updateMissionProgress(playerUid, mission, taskId, taskprogress);
             return true;
         }catch (NullPointerException e){

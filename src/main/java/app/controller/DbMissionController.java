@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/mission")
 public class DbMissionController {
     @Autowired
-    private MissionRepository repository;
+    private MissionsRepository repository;
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Mission> getMissions(){
 

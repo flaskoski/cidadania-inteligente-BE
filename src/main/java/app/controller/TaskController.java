@@ -35,6 +35,7 @@ public class TaskController {
         if(playerUid == null)
             return null;
 
+        System.out.println("Retrieving tasks progress...");
         List<String> taskIDs = new ArrayList<>();
         Iterator<Map.Entry<String, String>> it = params.entrySet().iterator();
         while(it.hasNext()){

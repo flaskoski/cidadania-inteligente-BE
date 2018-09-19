@@ -22,7 +22,7 @@ public class FirebaseValidator {
                     }
                     @Override
                     public void onSuccess(FirebaseToken decodedToken) {
-                        System.out.println(" Token is valid.");
+                        //System.out.println(" Token is valid.");
                         playerUid[0] = decodedToken.getUid();
 
                         //Release thread wait

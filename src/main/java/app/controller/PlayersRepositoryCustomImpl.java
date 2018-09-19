@@ -18,6 +18,13 @@ public class PlayersRepositoryCustomImpl implements PlayersRepositoryCustom{
     MongoTemplate mongoTemplate;
 
     @Override
+    public Player createPlayerProgressDocument(String playerUid){
+        Player p = new Player(playerUid);
+        mongoTemplate.insert(p);
+        return p;
+    }
+
+    @Override
     public MissionProgress createMissionProgress(String playerUid, Mission mission){
         Query query = new Query(Criteria.where("firebaseId").is(playerUid));
         Update update = new Update();
@@ -69,7 +76,8 @@ public class PlayersRepositoryCustomImpl implements PlayersRepositoryCustom{
         Query query = new Query(Criteria.where("firebaseId").is(playerUid));
         query.fields().include("missions."+missionId);
         Player p = mongoTemplate.findOne(query, Player.class);
-        assert p != null;
+        if(p == null) //Player not in database
+            p = createPlayerProgressDocument(playerUid);
         if(p.getMissions() != null && p.getMissions().size() > 0)
             return p.getMissions().get(missionId).getTaskProgress();
         else return new HashMap<>();
