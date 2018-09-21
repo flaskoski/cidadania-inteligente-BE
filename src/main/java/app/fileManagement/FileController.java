@@ -48,7 +48,13 @@ public class FileController {
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
-        Resource resource = fileStorageService.loadFileAsResource(fileName);
+        Resource resource = null;
+        try {
+            resource = fileStorageService.loadFileAsResource(fileName);
+        } catch (MyFileNotFoundException e) {
+            logger.info("File could not be found.");
+            return null;
+        }
 
         // Try to determine file's content type
         String contentType = null;
