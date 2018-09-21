@@ -5,3 +5,4 @@ TaskController.class
 out
 .gradle
 target
+.idea
