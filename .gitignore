@@ -1,8 +1,10 @@
 cidadania-inteligente-firebase-adminsdk-r64q9-66953f20fc.json
-workspace.xml
 PlayerController.class
 TaskController.class
 out
 .gradle
 target
+.idea/workspace.xml
 .idea
+resources
+uploads/
