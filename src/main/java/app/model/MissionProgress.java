@@ -66,6 +66,15 @@ public class MissionProgress {
     private String progressId;
     private HashMap<String, Integer> taskProgress;
     private Integer status;
+    private Integer xp;
+
+    public Integer getXp() {
+        return xp;
+    }
+
+    public void setXp(Integer xp) {
+        this.xp = xp;
+    }
 
     public MissionProgress(List<String> taskIds) {
         taskProgress = new HashMap<>();

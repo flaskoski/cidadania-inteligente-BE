@@ -10,6 +10,16 @@ public class Mission implements Serializable {
     private Integer missionIconId;
     private List<String> taskIDs;
 
+
+    //experience points that earns if completes the mission
+    private Integer xp;
+    //user level needed
+    private Integer level;
+    //mission difficulty (from 1 to 10)
+    private Integer difficulty;
+    //tags to search the mission
+    private List<String> tags;
+
     public List<String> getTaskIDs() {
         return taskIDs;
     }
@@ -73,6 +83,37 @@ public class Mission implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    public Integer getXp() {
+        return xp;
+    }
+
+    public void setXp(Integer xp) {
+        this.xp = xp;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
 }
