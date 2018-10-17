@@ -33,8 +33,12 @@ public class MissionProgress {
         updateStatus();
     }
 
-    public Integer getStatus() {
+    public void setOneTaskProgress(String taskId, Integer taskProgress) {
+        this.taskProgress.put(taskId, taskProgress);
         updateStatus();
+    }
+
+    public Integer getStatus() {
         return status;
     }
 

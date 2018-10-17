@@ -8,8 +8,6 @@ import java.util.Hashtable;
 
 @Document(collection = "players")
 public class Player {
-    @Id
-    private String _id;
 
     public String getFirebaseId() {
         return firebaseId;
@@ -19,9 +17,13 @@ public class Player {
         this.firebaseId = firebaseId;
     }
 
-    private String firebaseId;
-    private String username;
-    private HashMap<String, MissionProgress> missions;
+    public Integer getXp() {
+        return xp;
+    }
+
+    public void setXp(Integer xp) {
+        this.xp = xp;
+    }
 
     public HashMap<String, MissionProgress> getMissions() {
         return missions;
@@ -52,4 +54,15 @@ public class Player {
         this.firebaseId = firebaseId;
     }
 
+    @Id
+    private String _id;
+    private Integer xp;
+    private String firebaseId;
+    private String username;
+    private HashMap<String, MissionProgress> missions;
+
+    public Integer addXp(Integer xpWon) {
+        this.xp += xpWon;
+        return this.xp;
+    }
 }

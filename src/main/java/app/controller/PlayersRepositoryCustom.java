@@ -11,7 +11,7 @@ public interface PlayersRepositoryCustom {
 
     MissionProgress createMissionProgress(String playerUid, Mission mission) throws NullPointerException;
 
-    long updateMissionProgress(String playerUid, Mission missionId, String taskId, Integer taskProgress);
+    long updateMissionProgress(String playerUid, String missionId, String taskId, Integer taskProgress);
     HashMap<String, Integer> findTasksProgressByMission(String playerUid, String missionId);
 
     //HashMap<String, Integer> findTasksProgressByMission(String playerUid, Mission mission);

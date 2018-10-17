@@ -5,6 +5,7 @@ import java.util.*;
 import app.firebase.FirebaseValidator;
 import app.model.Mission;
 import app.model.MissionProgress;
+import app.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,11 @@ public class PlayerController {
         if(playerUid == null)
             return null;
         System.out.println("Retrieving all missions progress from player...");
-        HashMap<String, MissionProgress> missionsProgress = playersRepository.findByFirebaseId(playerUid).getMissions();
+        Player player = playersRepository.findByFirebaseId(playerUid);
+        if(player == null)
+            player = playersRepository.createPlayerProgressDocument(playerUid);
         System.out.println("All missions progress received.");
-        return missionsProgress;
+        return player.getMissions();
     }
 
     /**Get mission progress from a specific mission
@@ -91,14 +94,14 @@ public class PlayerController {
         missionId = params.get("missionId");
         String taskId = params.get("taskId");
         Integer taskprogress = Integer.valueOf(params.get("taskProgress"));
+
 //        String taskId= params[1];
 //        Integer taskprogress = Integer.valueOf(params[2]);
         //for(Integer i=1; i<=3; i++){
         System.out.println("Update missionId:"+missionId+"taskProgress: "+taskprogress.toString()    );
         //}
         try {
-            Mission mission = missionsRepository.findById(missionId).get();
-            playersRepository.updateMissionProgress(playerUid, mission, taskId, taskprogress);
+            playersRepository.updateMissionProgress(playerUid, missionId, taskId, taskprogress);
             return true;
         }catch (NullPointerException e){
             return false;
