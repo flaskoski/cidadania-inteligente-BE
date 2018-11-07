@@ -36,7 +36,6 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile 'com.google.firebase:firebase-admin:5.9.0'
-    compile("org.springframework.boot:spring-boot-devtools")
 //    compile 'org.springframework.boot:spring-boot-starter-security'
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     testCompile('org.springframework.boot:spring-boot-starter-test')

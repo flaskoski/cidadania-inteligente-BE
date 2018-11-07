@@ -54,13 +54,21 @@ public class Player {
         this.firebaseId = firebaseId;
     }
 
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    private Integer level;
+    private HashMap<String, MissionProgress> missions;
     @Id
     private String _id;
     private Integer xp;
     private String firebaseId;
     private String username;
-    private HashMap<String, MissionProgress> missions;
-
     public Integer addXp(Integer xpWon) {
         this.xp += xpWon;
         return this.xp;

@@ -5,6 +5,8 @@ out
 .gradle
 target
 .idea/workspace.xml
+.idea/modules.xml
+.idea/modules
 .idea
 resources
 uploads/
