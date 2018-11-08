@@ -80,7 +80,7 @@ public class PlayerController {
      * @param idToken - Player authentication
      * @return true if the update was sucessfull.
      */
-    @RequestMapping("/player")
+    @RequestMapping("/player/updateOne")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
     public Boolean updateMissionProgress(
             @RequestParam Map<String,String> params,
