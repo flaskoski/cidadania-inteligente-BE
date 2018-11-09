@@ -14,5 +14,7 @@ public interface PlayersRepositoryCustom {
     long updateMissionProgress(String playerUid, String missionId, String taskId, Integer taskProgress);
     HashMap<String, Integer> findTasksProgressByMission(String playerUid, String missionId);
 
+    Player getPlayerInfo(String playerUid);
+
     //HashMap<String, Integer> findTasksProgressByMission(String playerUid, Mission mission);
 }

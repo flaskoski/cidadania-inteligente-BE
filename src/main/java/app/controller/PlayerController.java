@@ -109,4 +109,26 @@ public class PlayerController {
 
     }
 
+    /**Updates a task progress on the DB.
+     *
+     * @param params - "missionId", "taskId" and "taskProgress" (as String)
+     * @param idToken - Player authentication
+     * @return true if the update was sucessfull.
+     */
+    @RequestMapping("/player")
+    //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
+    public Player sendPlayerInfo(
+            @RequestParam Map<String,String> params,
+            @RequestHeader(value="Authorization") String idToken) {//@RequestHeader String idToken
+
+        String playerUid = FirebaseValidator.validateUser(idToken);
+        if(playerUid == null) {
+            System.out.println("Player " + playerUid + " info requested but validation failed!");
+            return null;
+        }
+        System.out.println("Player "+ playerUid + " info requested and OK");
+
+        return playersRepository.getPlayerInfo(playerUid);
+    }
+
 }

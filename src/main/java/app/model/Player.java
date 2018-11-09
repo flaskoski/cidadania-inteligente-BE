@@ -49,7 +49,10 @@ public class Player {
         this.username = username;
     }
 
-    public Player(){}
+    public Player(){
+        this.xp = 0;
+        this.level = 1;
+    }
     public Player(String firebaseId){
         this.firebaseId = firebaseId;
     }

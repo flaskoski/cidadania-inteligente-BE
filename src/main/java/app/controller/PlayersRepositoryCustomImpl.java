@@ -6,7 +6,6 @@ import app.model.Player;
 import app.model.Task;
 import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -106,6 +105,16 @@ public class PlayersRepositoryCustomImpl implements PlayersRepositoryCustom{
         else return new HashMap<>();
     }
 
+    @Override
+    public Player getPlayerInfo(String playerUid) {
+        Query query = new Query(Criteria.where("firebaseId").is(playerUid));
+        query.fields().include("xp");
+        query.fields().include("level");
+        Player p = mongoTemplate.findOne(query, Player.class);
+        if(p == null) //Player not in database
+            p = createPlayerProgressDocument(playerUid);
+        return p;
+    }
 
 
 }
