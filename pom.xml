@@ -33,6 +33,14 @@
 			<artifactId>firebase-admin</artifactId>
 			<version>5.9.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.gms/google-services -->
+		<dependency>
+			<groupId>com.google.gms</groupId>
+			<artifactId>google-services</artifactId>
+			<version>3.1.1</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -63,7 +71,10 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>com.google.gms</groupId>
+            	<artifactId>google-services</artifactId>
+        	</plugin>
         </plugins>
 	</build>
 
