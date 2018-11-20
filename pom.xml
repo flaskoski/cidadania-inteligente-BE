@@ -71,10 +71,10 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>com.google.gms</groupId>
             	<artifactId>google-services</artifactId>
-        	</plugin>
+        	</plugin>-->
         </plugins>
 	</build>
 
