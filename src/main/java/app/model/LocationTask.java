@@ -55,7 +55,10 @@ public class LocationTask extends AbstractTask {
 
     }
 
-
+    @Override
+    public String getType() {
+        return "Localização";
+    }
 
     public String getDescription() {
         return description;

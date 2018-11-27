@@ -65,4 +65,6 @@ public abstract class AbstractTask implements Serializable {
 
 
     public Class<?> classType = this.getClass();
+
+    public abstract String getType();
 }

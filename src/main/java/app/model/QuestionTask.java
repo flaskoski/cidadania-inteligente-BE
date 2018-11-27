@@ -67,6 +67,10 @@ public class QuestionTask extends AbstractTask {
     }
 
     @Override
+    public String getType() {
+        return "Pergunta";
+    }
+    @Override
     public void setTitle(String question) {
         this.title = title;
     }
