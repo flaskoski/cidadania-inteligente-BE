@@ -1,13 +1,11 @@
 package app.controller;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 import app.firebase.FirebaseValidator;
+import app.model.AbstractTask;
 import app.model.QuestionTask;
-import app.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,11 +16,11 @@ public class TaskController {
 
     @RequestMapping("/tasks")
     //public Mission sendTasks(@RequestParam(value="uid", defaultValue="") String idToken) {
-    public ArrayList<QuestionTask> sendTasks(/*@RequestParam(value="missionID", defaultValue="") String missionID, */
+    public ArrayList<AbstractTask> sendTasks(/*@RequestParam(value="missionID", defaultValue="") String missionID, */
             @RequestParam Map<String,String> params,
             @RequestHeader HashMap<String, String> headers
             ) {//@RequestHeader String idToken   "Authorization"
-        final ArrayList<QuestionTask> tasks= new ArrayList<>();
+        final ArrayList<AbstractTask> tasks= new ArrayList<>();
         String idToken = headers.get("Authorization".toLowerCase());
         if(idToken != null)
             System.out.print("token caught!");

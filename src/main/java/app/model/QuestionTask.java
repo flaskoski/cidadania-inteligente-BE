@@ -3,19 +3,17 @@ package app.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 @Document(collection = "tasks")
-public class QuestionTask extends Task {
+public class QuestionTask extends AbstractTask {
     private String question;
     private ArrayList<String> answers;
     private Integer timeToAnswer;
     private Integer correctAnswer;
-    @Id
-    private String _id;
+
     /**
      *
      * @param title - Title of the task
@@ -63,13 +61,6 @@ public class QuestionTask extends Task {
             throw new InvalidParameterException("Correct Answer doesn't exist!");
 
     }
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
     @Override
     public String getTitle() {
         return title;
@@ -80,15 +71,7 @@ public class QuestionTask extends Task {
         this.title = title;
     }
 
-    @Override
-    public String getType() {
-        return "Pergunta";
-    }
 
-    @Override
-    public void setType(String type) {
-        this.type = type;
-    }
     public String getQuestion() {
         return question;
     }
@@ -118,4 +101,5 @@ public class QuestionTask extends Task {
     public void setCorrectAnswer(Integer correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
+
 }

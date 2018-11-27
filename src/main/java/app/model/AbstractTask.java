@@ -1,15 +1,20 @@
 package app.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class Task implements Serializable {
+@Document(collection = "tasks")
+public abstract class AbstractTask implements Serializable {
     protected String title = "";
     public Boolean completed = false;
-    String type = "task";
 
     static final int TIMER_OFF = -1;
-    public static final int TYPE_QUESTION = 1;
+
+    @Id
+    private String _id;
 
     //experience points that earns if completes the mission
     private Integer xp=0;
@@ -17,6 +22,15 @@ public abstract class Task implements Serializable {
     private Integer difficulty=1;
     //tags to search the mission
     private List<String> tags;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
 
     public Integer getXp() {
         return xp;
@@ -49,11 +63,6 @@ public abstract class Task implements Serializable {
         this.title = title;
     }
 
-    public String getType(){
-        return this.type;
-    }
-    public void setType(String type){
-        this.type = type;
-    }
 
+    public Class<?> classType = this.getClass();
 }

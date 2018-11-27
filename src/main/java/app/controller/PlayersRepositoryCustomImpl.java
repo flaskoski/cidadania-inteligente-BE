@@ -3,7 +3,7 @@ package app.controller;
 import app.model.Mission;
 import app.model.MissionProgress;
 import app.model.Player;
-import app.model.Task;
+import app.model.AbstractTask;
 import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -56,7 +56,7 @@ public class PlayersRepositoryCustomImpl implements PlayersRepositoryCustom{
         //mongoTemplate.save(currentPlayer);
 
         Mission mission = missionsRepository.findById(missionId).get();
-        Task task = tasksRepository.findById(taskId).get();
+        AbstractTask task = tasksRepository.findById(taskId).get();
 
         //find player progress
         Query query = new Query(Criteria.where("firebaseId").is(playerUid));
