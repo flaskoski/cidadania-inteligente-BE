@@ -55,7 +55,7 @@ public class QuestionTask extends AbstractTask {
     }
 
     private void checkIfParametersAreValid(String title, String question, ArrayList<String> answers, Integer correctAnswer){
-        if(answers.size() < 2 || answers.size() > 6 || (correctAnswer < 1 || correctAnswer > 6))
+        if(answers.size() < 1 || answers.size() > 6 || (correctAnswer < 1 || correctAnswer > 6))
             throw new InvalidParameterException("Number of answers must be between 2 and 6!");
         if(correctAnswer > answers.size() )
             throw new InvalidParameterException("Correct Answer doesn't exist!");
